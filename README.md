@@ -33,3 +33,8 @@ This web application features the following:
 9. To run a single migration `php artisan migrate --path=/database/migrations/my_migration.php`.
 
 10. To run single seeder `php artisan db:seed --class=UserSeeder`.
+
+## Disabled Feature
+
+1. User registration.
+2. Forgot password.

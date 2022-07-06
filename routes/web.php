@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Auth::routes([
+    'login'    => true,
+    'logout'   => true,
+    'register' => false,
+    'reset'    => false,   // for resetting passwords
+    'confirm'  => false,  // for additional password confirmations
+    'verify'   => false //,  // for email verification
+]);
+
+Route::prefix('client')->name('client.')->middleware(['auth', 'permitted.user'])->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
 });
+
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'permitted.user'])->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+});
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

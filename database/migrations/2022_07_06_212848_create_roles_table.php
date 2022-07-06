@@ -13,23 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
 
             $table->id();
-            $table->uuid('uuid');
-            $table->foreignId('role_id');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->string('username');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('phone_number', 20)->unique();
-            $table->string('image')->nullable()->unique();
+            $table->string('name');
+            $table->string('url', 50);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -42,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
     }
 };

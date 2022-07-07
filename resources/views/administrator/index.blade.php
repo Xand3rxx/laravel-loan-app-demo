@@ -63,11 +63,11 @@
                             style="background-position: right top; background-size: 30% auto; background-image: url(assets/media/svg/shapes/abstract-4.svg">
                             <!--begin::Body-->
                             <div class="card-body">
-                                <p class="text-dark-75 fw-bold fs-5 m-0">Track and follow-up with
-                                    your
-                                    loan applications</p>
+                                <a href="#" class="card-title fw-bolder text-muted text-hover-primary fs-4">Total Loan Requests
+                                    </a>
+                                <p class="text-dark-75 fw-bold fs-5 m-0">{{ number_format($loans->count()) }}</p>
 
-                                <a href="{{ route('client.loans.create') }}"
+                                <a href="{{ route('administrator.loans.create') }}"
                                     class="btn btn-primary fw-bold px-6 py-3 mt-10">Request Loan</a>
                             </div>
                             <!--end::Body-->
@@ -117,12 +117,13 @@
                     </div>
                     <div class="table-responsive">
                         <!--begin::Table-->
-                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="basic-example">
                             <!--begin::Table head-->
                             <thead>
                                 <!--begin::Table row-->
                                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="text-center">#</th>
+                                    <th>Borrower</th>
                                     <th class="text-center">Amount</th>
                                     <th class="text-center">Duration</th>
                                     <th class="text-center">Loan Type</th>
@@ -140,6 +141,9 @@
                                 @foreach ($loans as $loan)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td>
+                                            {{ !empty($loan['user']['first_name']) ? Str::title($loan['user']['first_name'] . ' ' . $loan['user']['last_name']) : 'Unavailable' }}
+                                        </td>
                                         <td class="text-center">{{ !empty($loan['loan_amount']) ? $loan->amount() : 0 }}
                                         </td>
                                         <td class="text-center">{{ !empty($loan['duration']) ? $loan['duration'] : 0 }}
@@ -173,11 +177,26 @@
                                                 data-kt-menu="true">
                                                 @if ($loan->status()->name == 'Pending')
                                                     <div class="menu-item px-3">
-                                                        <a href="{{ route('client.loans.edit', $loan['uuid']) }}"
-                                                            class="menu-link px-3 text-warning"> <i
-                                                                class="bi bi-pencil-square text-warning"></i><span
-                                                                style="margin-left: 0.5rem !important; margin-top: 0.1rem">Edit</span></a>
+                                                        <a href="{{ route('administrator.loans.toggle_status', [
+                                                            'uuid' => $loan['uuid'],
+                                                            'status' => 'approved',
+                                                        ]) }}"
+                                                            class="menu-link px-3 text-success"> <i
+                                                                class="bi bi-check text-success"></i><span
+                                                                style="margin-left: 0.5rem !important; margin-top: 0.1rem">Approve</span></a>
                                                     </div>
+
+                                                    <div class="menu-item px-3">
+                                                        <a href="{{ route('administrator.loans.toggle_status', [
+                                                            'uuid' => $loan['uuid'],
+                                                            'status' => 'rejected',
+                                                        ]) }}"
+                                                            class="menu-link px-3 text-danger"> <i
+                                                                class="bi bi-x text-danger"></i><span
+                                                                style="margin-left: 0.5rem !important; margin-top: 0.1rem">Reject</span></a>
+                                                    </div>
+                                                @endif
+                                                @if ($loan->status()->name != 'Approved')
                                                     <div class="menu-item px-3">
                                                         <a href="#"
                                                             onclick="event.preventDefault(); document.getElementById('delete-loan').submit();"
@@ -187,7 +206,7 @@
                                                                 style="margin-left: 0.5rem !important; margin-top: 0.1rem">Delete</span></a>
 
                                                         <form id="delete-loan"
-                                                            action="{{ route('client.loans.destroy', $loan['uuid']) }}"
+                                                            action="{{ route('administrator.loans.destroy', $loan['uuid']) }}"
                                                             method="POST" class="d-none">
                                                             @csrf @method('DELETE')
                                                         </form>

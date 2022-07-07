@@ -12,7 +12,14 @@ This web application features the following:
 4. An Administrator dashboard.
 5. An Administrator loan moderation feature.
 
-## Loan Demo Application Development Procedures
+## Features Not Included
+
+1. User registration.
+2. Forgot password.
+3. Profile update.
+4. Password change.
+
+## Loan Demo Application Setup
 
 1. CD into the application root directory with your command prompt/terminal/git bash.
 
@@ -34,9 +41,12 @@ This web application features the following:
 
 10. To run single seeder `php artisan db:seed --class=UserSeeder`.
 
-## Features Not Included
 
-1. User registration.
-2. Forgot password.
-3. Profile update.
-4. Password change.
+## Login credentials
+### Administrator Dashboard
+Email: `admin@mail.com`
+Password: `password`
+
+### Client Dashboard
+Email: `john.doe@gmail.com`
+Password: `password`

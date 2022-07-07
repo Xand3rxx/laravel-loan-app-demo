@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
         // Create global user for easy test
         User::create([
             'role_id'           => 2,
-            'email'             => 'johnathan.doe@gmail.com',
+            'email'             => 'john.doe@gmail.com',
             'password'          => bcrypt('password'),
             'email_verified_at' => now(),
             'username'          => 'J. Doe',

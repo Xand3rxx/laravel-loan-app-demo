@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Client\LoanController;
 
 /*
@@ -26,9 +27,13 @@ Auth::routes([
 ]);
 
 Route::get('/', function () {
-    return (auth()->user()->role->id === 1)
-        ? redirect()->route('admin.home')
-        : redirect()->route('client.home');
+    if (Auth::check()) {
+        return (auth()->user()->role->id === 1)
+            ? redirect()->route('administrator.home')
+            : redirect()->route('client.home');
+    } else {
+        return redirect()->route('login');
+    }
 });
 
 Route::prefix('client')->name('client.')->middleware(['auth', 'permitted.user'])->group(function () {
@@ -36,8 +41,6 @@ Route::prefix('client')->name('client.')->middleware(['auth', 'permitted.user'])
     Route::resource('loans',  LoanController::class);
 });
 
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'permitted.user'])->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('home');
+Route::prefix('administrator')->name('administrator.')->middleware(['auth', 'permitted.user'])->group(function () {
+    Route::get('/', [AdminHomeController::class, 'index'])->name('home');
 });

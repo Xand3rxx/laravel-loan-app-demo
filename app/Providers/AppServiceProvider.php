@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        view()->composer(['client.*', 'layouts.*', 'components.*'], function ($view) {
+        view()->composer(['client.*', 'layouts.*', 'components.*', 'administrator.*'], function ($view) {
             $view->with([
                 'user'  =>  \App\Models\User::where('id', auth()->id())->first()
             ]);

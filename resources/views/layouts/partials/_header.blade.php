@@ -22,7 +22,7 @@
                 <!--end::Svg Icon-->
             </div>
             <!--end::Heaeder menu toggle-->
-            <a href="{{ auth()->user()->role->id == 1 ? route('admin.home') : route('client.home') }}">
+            <a href="{{ auth()->user()->role->id == 1 ? route('administrator.home') : route('client.home') }}">
                 <img alt="Logo" height="50" src="{{ asset('assets/media/logos/brand_logo.jpeg') }}" />
             </a>
         </div>
@@ -115,7 +115,7 @@
                 id="#kt_header_menu" data-kt-menu="true">
                 <div data-kt-menu-placement="bottom-start" class="menu-item here show menu-lg-down-accordion me-lg-1">
                     <a class="menu-link active py-3"
-                        href="{{ auth()->user()->role->id == 1 ? route('admin.home') : route('client.home') }}">
+                        href="{{ auth()->user()->role->id == 1 ? route('administrator.home') : route('client.home') }}">
                         <span class="menu-title">Dashboard</span>
                         <span class="menu-arrow d-lg-none"></span>
                     </a>

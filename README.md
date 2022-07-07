@@ -41,12 +41,14 @@ This web application features the following:
 
 10. To run single seeder `php artisan db:seed --class=UserSeeder`.
 
-
 ## Login credentials
+
 ### Administrator Dashboard
+
 Email: `admin@mail.com`
 Password: `password`
 
 ### Client Dashboard
+
 Email: `john.doe@gmail.com`
 Password: `password`

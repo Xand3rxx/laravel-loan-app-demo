@@ -40,7 +40,7 @@ class User extends Authenticatable
      */
     public function role()
     {
-        return $this->hasOne(Role::class);
+        return $this->hasOne(Role::class, 'id', 'role_id');
     }
 
     /**
@@ -56,6 +56,6 @@ class User extends Authenticatable
      */
     public function loans()
     {
-        return $this->hasMany(Loan::class);
+        return $this->hasMany(Loan::class)->latest();
     }
 }

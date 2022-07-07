@@ -22,11 +22,11 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->foreignId('user_id');
-            $table->foreignId('approved_by');
             $table->double('loan_amount');
-            $table->unsignedInteger('duration');
-            $table->enum('status', Loan::STATUS)->default(Loan::STATUS['Pending']);
+            $table->unsignedTinyInteger('duration');
             $table->enum('loan_type', Loan::TYPE);
+            $table->enum('status', Loan::STATUS)->default(Loan::STATUS['Pending']);
+            $table->foreignId('approved_by')->nullable();
             $table->date('approved_at')->nullable();
             $table->softDeletes();
             $table->timestamps();

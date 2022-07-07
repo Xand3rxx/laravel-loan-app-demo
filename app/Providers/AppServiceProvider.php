@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,13 +26,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        if(Auth::check()){
-            // Pass User profile details to layouts view
-            view()->composer('layouts.*', function ($view) {
-                $view->with([
-                    'user'  =>  \App\Models\User::where('id', auth()->id())->first()
-                ]);
-            });
-        }
+        view()->composer(['client.*', 'layouts.*', 'components.*'], function ($view) {
+            $view->with([
+                'user'  =>  \App\Models\User::where('id', auth()->id())->first()
+            ]);
+        });
     }
 }

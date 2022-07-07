@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone_number', 20)->unique();
-            $table->string('image')->nullable()->unique();
+            $table->string('image')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

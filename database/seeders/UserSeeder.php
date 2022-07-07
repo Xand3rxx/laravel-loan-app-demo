@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\URL;
 
 class UserSeeder extends Seeder
 {
@@ -24,6 +25,7 @@ class UserSeeder extends Seeder
             'first_name'        => 'Anthony',
             'last_name'         => 'Joboy',
             'phone_number'      => '09089023283',
+            'image'             => URL::to('/') . ':' . env('APP_PORT') . '/assets/media/avatars/blank.png',
         ]);
 
         // Create global user for easy test
@@ -32,10 +34,11 @@ class UserSeeder extends Seeder
             'email'             => 'johnathan.doe@gmail.com',
             'password'          => bcrypt('password'),
             'email_verified_at' => now(),
-            'username'          => 'Client',
+            'username'          => 'J. Doe',
             'first_name'        => 'Johnathan',
             'last_name'         => 'Okoye',
             'phone_number'      => '08031900672',
+            'image'             => URL::to('/') . ':' . env('APP_PORT') . '/assets/media/avatars/blank.png',
         ]);
 
         // Generate 18 other client users

@@ -18,7 +18,7 @@ This web application features the following:
 
 2. Run `cp .env.example .env`.
 
-3. Inside `.env` file, setup database, mail and other configurations.
+3. Inside `.env` file, setup database, `port number`, mail and other configurations.
 
 4. Run `composer install`.
 
@@ -34,7 +34,9 @@ This web application features the following:
 
 10. To run single seeder `php artisan db:seed --class=UserSeeder`.
 
-## Disabled Feature
+## Features Not Included
 
 1. User registration.
 2. Forgot password.
+3. Profile update.
+4. Password change.

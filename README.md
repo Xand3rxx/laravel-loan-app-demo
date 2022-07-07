@@ -45,6 +45,24 @@ This web application features the following:
 
 12. Run tests with `php artisan test`.
 
+```
+    PASS  Tests\Unit\ExampleTest
+  ✓ that true is true
+
+   PASS  Tests\Feature\LoanTest
+  ✓ loan amount is required
+  ✓ loan duration is required
+  ✓ loan type is required
+  ✓ only an authenticated user can request for a loan
+  ✓ an authenticated user can request for a loan
+  ✓ loan id exists
+  ✓ only an authenticated user can update a loan request
+  ✓ can delete loan record
+
+  Tests:  9 passed
+  Time:   0.97s
+```
+
 ## Login credentials
 
 ### Administrator Dashboard

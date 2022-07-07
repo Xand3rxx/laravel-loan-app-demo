@@ -110,17 +110,17 @@ class LoanController extends Controller
      */
     public function toggleStatus($uuid, string $status)
     {
-        // return [$status, Loan::STATUS['Approved']];
         // Check if the status in the URL parameter is valid
-        // if ($status != Loan::STATUS['Pending'] || $status != Loan::STATUS['Approved'] || $status != Loan::STATUS['Rejected']) return back()->with('error', 'Invalid loan status');
-        $approved = Loan::STATUS['Approved'];
-
-        // Update loan status
-        $updated = Loan::where('uuid', $uuid)->firstOrFail()->update([
-            'status' => $status,
-            'approved_by' => ($status == $approved) ? auth()->id() : '',
-            'approved_at' => ($status == $approved) ? now() : ''
-        ]);
+        if (strcmp($status, Loan::STATUS['Pending']) || strcmp($status, Loan::STATUS['Approved']) || strcmp($status, Loan::STATUS['Rejected'])) {
+            // Update loan status
+            $updated = Loan::where('uuid', $uuid)->firstOrFail()->update([
+                'status' => $status,
+                'approved_by' => auth()->id(),
+                'approved_at' => now()
+            ]);
+        } else {
+            return back()->with('error', 'Invalid loan status');
+        }
 
         return ($updated)
             ? redirect()->back()->with('success', 'Loan status was updated successfully.')

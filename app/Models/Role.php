@@ -14,6 +14,8 @@ class Role extends Model
         'client'    => 'client',
     ];
 
+    protected $guarded = [];
+
     public function users()
     {
         return $this->hasMany(User::class);

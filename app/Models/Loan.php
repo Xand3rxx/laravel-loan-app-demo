@@ -54,6 +54,18 @@ class Loan extends Model
     }
 
     /**
+     * Path to view loan information.
+     */
+    public function path()
+    {
+        if (auth()->check() && (auth()->user()->role->url === 'administrator')) {
+            return '/administrator/loans/' . $this->uuid;
+        }
+
+        return '/client/loans/' . $this->uuid;
+    }
+
+    /**
      * Format the loan amount and append currency symbol.
      */
     public function amount()

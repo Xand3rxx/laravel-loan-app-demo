@@ -40,6 +40,10 @@ This web application features the following:
 9. To run a single migration `php artisan migrate --path=/database/migrations/my_migration.php`.
 
 10. To run single seeder `php artisan db:seed --class=UserSeeder`.
+    
+11. To run test first, comment out your current database configuration in the env file and add `DB_CONNECTION=sqlite`.
+
+12. Run tests with `php artisan test`.
 
 ## Login credentials
 
@@ -52,10 +56,6 @@ Password: `password`
 
 Email: `john.doe@gmail.com`
 Password: `password`
-
-## Todo List
-
-1. Write test
 
 ## Project Screenshots
 

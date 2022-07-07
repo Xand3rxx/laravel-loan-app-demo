@@ -31,7 +31,7 @@ class LoanController extends Controller
      */
     public function create()
     {
-        return view('client.loans.create');
+        return view('administrator.loans.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class LoanController extends Controller
     {
         // Create loan record from user input and default parameters.
         return ($createLoan->handle($request->validated()))
-            ? redirect()->route('client.home')->with('success', 'Loan was successfully requested.')
+            ? redirect()->route('administrator.home')->with('success', 'Loan was successfully requested.')
             : back()->with('error', 'Sorry! An error occured while trying to request loan.');
     }
 
@@ -68,7 +68,7 @@ class LoanController extends Controller
      */
     public function edit(Loan $loan)
     {
-        return view('client.loans.edit', ['loan' => $loan]);
+        return view('administrator.loans.edit', ['loan' => $loan]);
     }
 
     /**
@@ -83,7 +83,7 @@ class LoanController extends Controller
     {
         // Update loan record from user input and default parameters.
         return ($updateLoan->handle($loan, $request->validated()))
-            ? redirect()->route('client.home')->with('success', 'Loan request was successfully updated.')
+            ? redirect()->route('administrator.home')->with('success', 'Loan request was successfully updated.')
             : back()->with('error', 'Sorry! An error occured while trying to update loan request.');
     }
 

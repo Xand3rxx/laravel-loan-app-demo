@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <!--begin::Head-->
+
 <head>
     <meta charset="utf-8" />
-    <meta name="description" content="Banks charge a lot for overseas transfers. We don't. Transfer money abroad easily and quickly with our low cost money transfers." />
+    <meta name="description"
+        content="Banks charge a lot for overseas transfers. We don't. Transfer money abroad easily and quickly with our low cost money transfers." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Anthony Joboy (+2349035547107)" />
     <meta property="og:locale" content="en_US" />
@@ -24,8 +26,11 @@
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 
-    @if(Route::has('home'))
-        <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    @if (Route::has('client.home') || Route::has('administrator.home'))
+        <link href="{{ asset('assets/plugins/custom/datatables/dataTables.bs4.css') }}" rel="stylesheet"
+            type="text/css" />
+        <link href="{{ asset('assets/plugins/custom/datatables/dataTables.bs4-custom.css') }}" rel="stylesheet"
+            type="text/css" />
     @endif
 
     @stack('styles')
@@ -39,15 +44,15 @@
     <!--begin::Root-->
     <div class="d-flex flex-column flex-root">
         <!--begin::Page-->
-			<div class="page d-flex flex-row flex-column-fluid">
-				<!--begin::Wrapper-->
-				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-                    @include('layouts.partials._header')
-                        @yield('content')
-                    @include('layouts.partials._footer')
-                </div>
-                <!--end::Wrapper-->
+        <div class="page d-flex flex-row flex-column-fluid">
+            <!--begin::Wrapper-->
+            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+                @include('layouts.partials._header')
+                @yield('content')
+                @include('layouts.partials._footer')
             </div>
+            <!--end::Wrapper-->
+        </div>
         <!--end::Page-->
     </div>
     <!--end::Root-->
@@ -56,13 +61,11 @@
     <!--begin::Global Javascript Bundle(used by all pages)-->
     <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/general.js') }}"></script>
-
-    @if(Route::has('home'))
-        <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-        <script src="{{ asset('assets/js/custom/apps/user-management/users/list/table.js') }}"></script>
-        <script src="{{ asset('assets/js/custom/apps/customers/list/list.js') }}"></script>
+    @if (Route::has('client.home') || Route::has('administrator.home'))
+        <script src="{{ asset('assets/plugins/custom/datatables/dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/custom/datatables/dataTables.bootstrap.min.js') }}"></script>
     @endif
+    <script src="{{ asset('assets/js/general.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Page Custom Javascript(used by this page)-->
     @stack('scripts')
@@ -70,4 +73,5 @@
     <!--end::Javascript-->
 </body>
 <!--end::Body-->
+
 </html>

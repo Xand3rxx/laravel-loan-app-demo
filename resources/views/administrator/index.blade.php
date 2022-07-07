@@ -63,12 +63,16 @@
                             style="background-position: right top; background-size: 30% auto; background-image: url(assets/media/svg/shapes/abstract-4.svg">
                             <!--begin::Body-->
                             <div class="card-body">
-                                <a href="#" class="card-title fw-bolder text-muted text-hover-primary fs-4">Total Loan Requests
-                                    </a>
+                                <a href="#" class="card-title fw-bolder text-muted text-hover-primary fs-4">Total Loan
+                                    Requests
+                                </a>
                                 <p class="text-dark-75 fw-bold fs-5 m-0">{{ number_format($loans->count()) }}</p>
 
-                                <a href="{{ route('administrator.loans.create') }}"
-                                    class="btn btn-primary fw-bold px-6 py-3 mt-10">Request Loan</a>
+                                <div class="mt-5 text-center">
+                                    <p class="text-muted">You can also request a loan as an Administrator</p>
+                                    <a href="{{ route('administrator.loans.create') }}"
+                                        class="btn btn-primary fw-bold px-6 py-3">Request Loan</a>
+                                </div>
                             </div>
                             <!--end::Body-->
                         </div>
@@ -95,29 +99,9 @@
                 </div>
 
                 <div class="card-body py-4">
-                    <div class="card-title">
-                        <!--begin::Search-->
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none">
-                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2"
-                                        rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
-                                    <path
-                                        d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                        fill="black"></path>
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                            <input type="text" data-kt-user-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search loan history">
-                        </div>
-                        <!--end::Search-->
-                    </div>
                     <div class="table-responsive">
                         <!--begin::Table-->
-                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="basic-example">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="basicExample">
                             <!--begin::Table head-->
                             <thead>
                                 <!--begin::Table row-->
@@ -143,6 +127,10 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>
                                             {{ !empty($loan['user']['first_name']) ? Str::title($loan['user']['first_name'] . ' ' . $loan['user']['last_name']) : 'Unavailable' }}
+                                            @if($loan['user']['role']['url'] == 'administrator')
+                                            <sup class="badge badge-success">Admin</sup>
+                                            @endif
+
                                         </td>
                                         <td class="text-center">{{ !empty($loan['loan_amount']) ? $loan->amount() : 0 }}
                                         </td>
